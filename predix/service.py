@@ -13,12 +13,12 @@ class Service(object):
     General class for making REST calls to Predix multi-tenant
     services that require a Predix-Zone-Id and Bearer token.
     """
-    def __init__(self, zone, *args, **kwargs):
+    def __init__(self, zone, uaa=None, *args, **kwargs):
         super(Service, self).__init__(*args, **kwargs)
 
         self.zone = zone
 
-        self.uaa = kwargs.get('uaa',predix.security.uaa.UserAccountAuthentication())
+        self.uaa = uaa or predix.security.uaa.UserAccountAuthentication()
         self.session = requests.Session()
 
         self._auto_authenticate()

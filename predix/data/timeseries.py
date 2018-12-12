@@ -44,7 +44,7 @@ class TimeSeries(object):
     GOOD = 3
 
     def __init__(self, read=True, write=True, query_uri=None, ingest_uri=None,
-            query_zone_id=None, ingest_zone_id=None, *args, **kwargs):
+            query_zone_id=None, ingest_zone_id=None, service=None,*args, **kwargs):
         """
         Time Series by default will grant the client both read
         and write permissions.  Either can be disabled.
@@ -62,7 +62,7 @@ class TimeSeries(object):
             self.ingest_zone_id = ingest_zone_id or self._get_ingest_zone_id()
 
         self.zone_id = self.query_zone_id or self.ingest_zone_id
-        self.service = predix.service.Service(self.zone_id)
+        self.service = service or predix.service.Service(self.zone_id)
 
         # Store a websocket connection once opened
         self.ws = None
