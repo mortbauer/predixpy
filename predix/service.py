@@ -18,7 +18,7 @@ class Service(object):
 
         self.zone = zone
 
-        self.uaa = predix.security.uaa.UserAccountAuthentication()
+        self.uaa = kwargs.get('uaa',predix.security.uaa.UserAccountAuthentication())
         self.session = requests.Session()
 
         self._auto_authenticate()
