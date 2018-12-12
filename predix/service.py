@@ -21,7 +21,8 @@ class Service(object):
         self.uaa = uaa or predix.security.uaa.UserAccountAuthentication()
         self.session = requests.Session()
 
-        self._auto_authenticate()
+        if not self.uaa.authenticated:
+            self._auto_authenticate()
 
     def __del__(self):
         self.session.close()
