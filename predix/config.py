@@ -16,11 +16,11 @@ def get_crypt_key(key_path):
     """
     key_path = os.path.expanduser(key_path)
     if os.path.exists(key_path):
-        with open(key_path, 'r') as data:
+        with open(key_path, 'rb') as data:
             key = data.read()
     else:
         key = Fernet.generate_key()
-        with open(key_path, 'w') as output:
+        with open(key_path, 'wb') as output:
             output.write(key)
 
     return key
